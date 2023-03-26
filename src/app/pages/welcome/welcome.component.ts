@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
+import { EventsService } from 'src/app/shared/services/nswag/service-proxies';
 
 // import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 
@@ -8,19 +9,11 @@ import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css'],
 })
-export class WelcomeComponent {
+export class WelcomeComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: any = [
-    '2006',
-    '2007',
-    '2008',
-    '2009',
-    '2010',
-    '2011',
-    '2012',
-  ];
+  public barChartLabels: any = ['Data', 'Data'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
@@ -32,7 +25,11 @@ export class WelcomeComponent {
     { data: [60], label: 'Series E', stack: 'a' },
   ];
 
-  constructor() {}
+  constructor(private apiService: EventsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.apiService.chart().subscribe((e) => {
+      this.barChartData = e;
+    });
+  }
 }

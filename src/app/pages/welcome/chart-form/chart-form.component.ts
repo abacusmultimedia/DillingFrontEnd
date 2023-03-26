@@ -55,10 +55,10 @@ export class ChartFormComponent {
     });
     this.subscriptions();
     this._item.subscribe((e) => {
+      this.eventForm.reset();
       this.eventForm.patchValue(e.item);
-      this.itemid = e.item.id;
+      this.itemid = e.isEditmode ? e.item.id : 0;
       this.isEditMode = e.isEditmode;
-      console.log(e);
     });
   }
 

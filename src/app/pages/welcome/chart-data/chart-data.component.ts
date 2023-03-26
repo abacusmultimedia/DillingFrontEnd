@@ -46,17 +46,20 @@ export class ChartDataComponent implements OnInit {
       isEditmode: true,
     };
     this._item.next(payload);
-    this.showModal();
+    this.isVisible = true;
   }
 
   // Data handlers ends
 
   /// model
 
-
-
   showModal(): void {
     this._modelTitle.next('Add');
+    let payload = {
+      item: {},
+      isEditmode: false,
+    };
+    this._item.next(payload);
     this.isVisible = true;
   }
 
